@@ -1,0 +1,8 @@
+/GodLoginServer/src/main/java/db/LoginMysqlWorker.java
+target/
+*.iml
+*.log
+*.MF
+*.jar
+test/
+.idea/
