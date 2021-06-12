@@ -39,12 +39,12 @@ public class DiyMysqlWorker {
         }
     }
 
-    public int saveDiyWorldMap(String userName, String mapName, String mapData, String mapInfo){
+    public int saveDiyWorldMap(String userName, String mapName, String mapData, String mapInfo, String mapImageData){
         int result = -1;
         try {
 
             //String sql = "select save_diy_world_map(?, ?, ?, ?)";
-            String sql = "INSERT INTO world_map (author_name, map_name, map_data, upload_time, map_info) VALUES (?, ?, ?, CURRENT_TIME(), ?)";
+            String sql = "INSERT INTO world_map (author_name, map_name, map_data, upload_time, map_info, map_image_data) VALUES (?, ?, ?, CURRENT_TIME(), ?, ?)";
 
             //;
 
@@ -53,6 +53,7 @@ public class DiyMysqlWorker {
             pstat.setString(2, mapName);
             pstat.setString(3, mapData);
             pstat.setString(4, mapInfo);
+            pstat.setString(5, mapImageData);
             pstat.executeUpdate();
 
             ResultSet rs = pstat.getGeneratedKeys();
@@ -76,7 +77,7 @@ public class DiyMysqlWorker {
         int result = -1;
         try {
             MysqlConnection db = MysqlConnection.getSingleton();
-            String sql = "select author_name, map_name, map_data, upload_time, map_info from world_map where id = (?) limit 1";
+            String sql = "select author_name, map_name, map_data, upload_time, map_info, map_image_data from world_map where id = (?) limit 1";
 
             PreparedStatement pstat = db.connection.prepareStatement(sql);
             pstat.setInt(1, targetMapId);
@@ -95,6 +96,7 @@ public class DiyMysqlWorker {
                 worldMapContent.mapData = mapData;
                 worldMapContent.mapInfo = mapInfo;
                 worldMapContent.uploadDate = uploadDate;
+                worldMapContent.mapImageData = rs.getString("map_image_data");
                 worldMapContent.id = targetMapId;
             }
             //完成后关闭
@@ -120,7 +122,7 @@ public class DiyMysqlWorker {
         int result = -1;
         try {
             MysqlConnection db = MysqlConnection.getSingleton();
-            String sql = "select id, map_name, author_name, upload_time, map_info from world_map order by %s %s limit ?, ?";
+            String sql = "select id, map_name, author_name, upload_time, map_info, map_image_data from world_map order by %s %s limit ?, ?";
             sql = String.format(sql, orderBy, asc ? "ASC" : "DESC");
 
             PreparedStatement pstat = db.connection.prepareStatement(sql);
@@ -131,17 +133,14 @@ public class DiyMysqlWorker {
 
             // 展开结果集数据库
             while (rs.next()) {
-                String mapName = rs.getString("map_name");
-                String authorName = rs.getString("author_name");
-                String mapInfo = rs.getString("map_info");
                 Timestamp uploadTime = rs.getTimestamp("upload_time");
-                int mapId = rs.getInt("id");
 
-                WorldMapContent worldMapContent = new WorldMapContent(mapId);
-                worldMapContent.mapName = mapName;
-                worldMapContent.authorName = authorName;
-                worldMapContent.mapInfo = mapInfo;
+                WorldMapContent worldMapContent = new WorldMapContent(rs.getInt("id"));
+                worldMapContent.mapName = rs.getString("map_name");
+                worldMapContent.authorName = rs.getString("author_name");
+                worldMapContent.mapInfo = rs.getString("map_info");
                 worldMapContent.uploadDate = new java.util.Date(uploadTime.getTime());
+                worldMapContent.mapImageData = rs.getString("map_image_data");
                 pageDiyWorldMapGetResult.addMapContent(worldMapContent);
             }
 
@@ -171,7 +170,7 @@ public class DiyMysqlWorker {
         PageDiyWorldMapGetResult pageDiyWorldMapGetResult = new PageDiyWorldMapGetResult();
         try {
             MysqlConnection db = MysqlConnection.getSingleton();
-            String sql = "select id, map_name, author_name, upload_time, map_info from world_map where %s = ? order by %s %s limit ?, ?";
+            String sql = "select id, map_name, author_name, upload_time, map_info, map_image_data from world_map where %s = ? order by %s %s limit ?, ?";
             sql = String.format(sql, searchName, orderBy, asc ? "ASC" : "DESC");
 
             PreparedStatement pstat = db.connection.prepareStatement(sql);
@@ -184,18 +183,14 @@ public class DiyMysqlWorker {
 
             // 展开结果集数据库
             while (rs.next()) {
-                int mapId = rs.getInt("id");
-                String mapName = rs.getString("map_name");
-                String authorName = rs.getString("author_name");
-                String mapInfo = rs.getString("map_info");
-                //Date uploadDate = rs.getDate("upload_time");
                 Timestamp uploadTime = rs.getTimestamp("upload_time");
 
-                WorldMapContent worldMapContent = new WorldMapContent(mapId);
-                worldMapContent.mapName = mapName;
-                worldMapContent.authorName = authorName;
-                worldMapContent.mapInfo = mapInfo;
+                WorldMapContent worldMapContent = new WorldMapContent(rs.getInt("id"));
+                worldMapContent.mapName = rs.getString("map_name");
+                worldMapContent.authorName = rs.getString("author_name");
+                worldMapContent.mapInfo = rs.getString("map_info");
                 worldMapContent.uploadDate = new java.util.Date(uploadTime.getTime());
+                worldMapContent.mapImageData = rs.getString("map_image_data");
                 pageDiyWorldMapGetResult.addMapContent(worldMapContent);
             }
 

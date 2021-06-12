@@ -90,6 +90,7 @@ public class MQSCMsgReqHeartBeatHandler extends MsgHandler{
             responseBuilder.setType(SCMessage.Type.HEART_BEAT);
             responseBuilder.setTip("pong");
             responseBuilder.setTimestamp(System.currentTimeMillis());
+            responseBuilder.setRequestId(request.getRequestId());
 
             //SCMessage.Response response = responseBuilder.build();
 

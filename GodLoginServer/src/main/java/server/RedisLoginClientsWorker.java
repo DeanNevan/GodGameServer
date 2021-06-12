@@ -33,12 +33,14 @@ public class RedisLoginClientsWorker {
         while (iter.hasNext()) {
             intList.add((int) iter.next());
         }
+        RedisConnection.getSingleton().close(jedis);
         return intList;
     }
 
     public boolean isLoginClientIDExists(String id){
         Jedis jedis = RedisConnection.getSingleton().getJedis();
         boolean result = jedis.hexists("client:login_clients", id);
+        RedisConnection.getSingleton().close(jedis);
         return result;
     }
 
@@ -49,6 +51,7 @@ public class RedisLoginClientsWorker {
         LoginClient loginClient = new LoginClient("", "");
        loginClient.parseFromJSONString(jsonString);
         assert id.equals(loginClient.getId());
+        RedisConnection.getSingleton().close(jedis);
         return loginClient;
     }
 
@@ -60,11 +63,13 @@ public class RedisLoginClientsWorker {
         loginClient.parseToJSONObject(object);
         String string = object.toJSONString();
         jedis.hset("client:login_clients", loginClient.getId(), string);
+        RedisConnection.getSingleton().close(jedis);
     }
 
     public void removeLoginClient(LoginClient loginClient){
         Jedis jedis = RedisConnection.getSingleton().getJedis();
         jedis.hdel("client:login_clients", String.valueOf(loginClient.getId()));
+        RedisConnection.getSingleton().close(jedis);
     }
 
     public void removeLoginClient(String id){
@@ -72,6 +77,7 @@ public class RedisLoginClientsWorker {
         LoginClient loginClient = getLoginClientViaID(id);
         if (loginClient == null) return;
         jedis.hdel("client:login_clients", String.valueOf(loginClient.getId()));
+        RedisConnection.getSingleton().close(jedis);
     }
 
 }

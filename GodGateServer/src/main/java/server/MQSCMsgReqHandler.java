@@ -56,7 +56,10 @@ public class MQSCMsgReqHandler extends MsgHandler{
     }
 
     public void distribute(SCMessage.Request msg) {
-        server.logger.debug(String.format("服务器ID:%s %s 处理消息：%s",server.getServerID(), msgHandlerName, msg.toString()));
+        if (msg.toByteString().size() < 500){
+            server.logger.debug(String.format("服务器ID:%s %s 处理消息：%s",server.getServerID(), msgHandlerName, msg.toString()));
+        }
+        server.logger.debug(String.format("服务器ID:%s %s 处理消息长度：%d",server.getServerID(), msgHandlerName, msg.toByteString().size()));
         try {
             //发送消息
             // 创建队列目标,并标识队列名称，消费者根据队列名称接收数据

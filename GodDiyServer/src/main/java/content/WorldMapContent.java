@@ -13,6 +13,7 @@ public class WorldMapContent {
     public String mapData = "";
     public String mapInfo = "";
     public Date uploadDate = new Date();
+    public String mapImageData = "";
 
     public WorldMapContent(int id){
         this.id = id;
@@ -36,7 +37,8 @@ public class WorldMapContent {
                 .setMapName(this.mapName)
                 .setUploadTime(this.dateToString(this.uploadDate))
                 .setMapData(mapData)
-                .setMapInfo(mapInfo);
+                .setMapInfo(mapInfo)
+                .setMapImageData(mapImageData);
         return mapContentBuilder;
     }
 }

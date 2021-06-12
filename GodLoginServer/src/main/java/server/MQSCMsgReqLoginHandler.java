@@ -225,6 +225,7 @@ public class MQSCMsgReqLoginHandler extends MsgHandler {
             responseBuilder.setGateServerId(request.getGateServerId());
             responseBuilder.addAllPassedServersId(request.getPassedServersIdList());
             responseBuilder.addPassedServersId(server.getServerID());
+            responseBuilder.setRequestId(request.getRequestId());
 
             try {
                 MQProducerTool.getInstance().sendBuilder("SCMessageResponse", responseBuilder, "target_server_id", request.getGateServerId());

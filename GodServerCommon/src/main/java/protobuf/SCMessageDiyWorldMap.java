@@ -3186,6 +3186,16 @@ public final class SCMessageDiyWorldMap {
      */
     com.google.protobuf.ByteString
         getMapInfoBytes();
+
+    /**
+     * <code>string map_image_data = 7;</code>
+     */
+    String getMapImageData();
+    /**
+     * <code>string map_image_data = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getMapImageDataBytes();
   }
   /**
    * Protobuf type {@code MapContent}
@@ -3205,6 +3215,7 @@ public final class SCMessageDiyWorldMap {
       uploadTime_ = "";
       mapAuthor_ = "";
       mapInfo_ = "";
+      mapImageData_ = "";
     }
 
     @Override
@@ -3264,6 +3275,12 @@ public final class SCMessageDiyWorldMap {
               String s = input.readStringRequireUtf8();
 
               mapInfo_ = s;
+              break;
+            }
+            case 58: {
+              String s = input.readStringRequireUtf8();
+
+              mapImageData_ = s;
               break;
             }
             default: {
@@ -3477,6 +3494,40 @@ public final class SCMessageDiyWorldMap {
       }
     }
 
+    public static final int MAP_IMAGE_DATA_FIELD_NUMBER = 7;
+    private volatile Object mapImageData_;
+    /**
+     * <code>string map_image_data = 7;</code>
+     */
+    public String getMapImageData() {
+      Object ref = mapImageData_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        mapImageData_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string map_image_data = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMapImageDataBytes() {
+      Object ref = mapImageData_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        mapImageData_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @Override
     public final boolean isInitialized() {
@@ -3509,6 +3560,9 @@ public final class SCMessageDiyWorldMap {
       if (!getMapInfoBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 6, mapInfo_);
       }
+      if (!getMapImageDataBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, mapImageData_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -3537,6 +3591,9 @@ public final class SCMessageDiyWorldMap {
       if (!getMapInfoBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, mapInfo_);
       }
+      if (!getMapImageDataBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, mapImageData_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -3564,6 +3621,8 @@ public final class SCMessageDiyWorldMap {
           .equals(other.getMapAuthor())) return false;
       if (!getMapInfo()
           .equals(other.getMapInfo())) return false;
+      if (!getMapImageData()
+          .equals(other.getMapImageData())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3587,6 +3646,8 @@ public final class SCMessageDiyWorldMap {
       hash = (53 * hash) + getMapAuthor().hashCode();
       hash = (37 * hash) + MAP_INFO_FIELD_NUMBER;
       hash = (53 * hash) + getMapInfo().hashCode();
+      hash = (37 * hash) + MAP_IMAGE_DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getMapImageData().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3732,6 +3793,8 @@ public final class SCMessageDiyWorldMap {
 
         mapInfo_ = "";
 
+        mapImageData_ = "";
+
         return this;
       }
 
@@ -3764,6 +3827,7 @@ public final class SCMessageDiyWorldMap {
         result.uploadTime_ = uploadTime_;
         result.mapAuthor_ = mapAuthor_;
         result.mapInfo_ = mapInfo_;
+        result.mapImageData_ = mapImageData_;
         onBuilt();
         return result;
       }
@@ -3833,6 +3897,10 @@ public final class SCMessageDiyWorldMap {
         }
         if (!other.getMapInfo().isEmpty()) {
           mapInfo_ = other.mapInfo_;
+          onChanged();
+        }
+        if (!other.getMapImageData().isEmpty()) {
+          mapImageData_ = other.mapImageData_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -4234,6 +4302,75 @@ public final class SCMessageDiyWorldMap {
         onChanged();
         return this;
       }
+
+      private Object mapImageData_ = "";
+      /**
+       * <code>string map_image_data = 7;</code>
+       */
+      public String getMapImageData() {
+        Object ref = mapImageData_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          mapImageData_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>string map_image_data = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMapImageDataBytes() {
+        Object ref = mapImageData_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          mapImageData_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string map_image_data = 7;</code>
+       */
+      public Builder setMapImageData(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        mapImageData_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string map_image_data = 7;</code>
+       */
+      public Builder clearMapImageData() {
+        
+        mapImageData_ = getDefaultInstance().getMapImageData();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string map_image_data = 7;</code>
+       */
+      public Builder setMapImageDataBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        mapImageData_ = value;
+        onChanged();
+        return this;
+      }
       @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4320,6 +4457,16 @@ public final class SCMessageDiyWorldMap {
      */
     com.google.protobuf.ByteString
         getMapInfoBytes();
+
+    /**
+     * <code>string map_image_data = 4;</code>
+     */
+    String getMapImageData();
+    /**
+     * <code>string map_image_data = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getMapImageDataBytes();
   }
   /**
    * Protobuf type {@code RequestSave}
@@ -4337,6 +4484,7 @@ public final class SCMessageDiyWorldMap {
       mapName_ = "";
       mapData_ = "";
       mapInfo_ = "";
+      mapImageData_ = "";
     }
 
     @Override
@@ -4379,6 +4527,12 @@ public final class SCMessageDiyWorldMap {
               String s = input.readStringRequireUtf8();
 
               mapInfo_ = s;
+              break;
+            }
+            case 34: {
+              String s = input.readStringRequireUtf8();
+
+              mapImageData_ = s;
               break;
             }
             default: {
@@ -4515,6 +4669,40 @@ public final class SCMessageDiyWorldMap {
       }
     }
 
+    public static final int MAP_IMAGE_DATA_FIELD_NUMBER = 4;
+    private volatile Object mapImageData_;
+    /**
+     * <code>string map_image_data = 4;</code>
+     */
+    public String getMapImageData() {
+      Object ref = mapImageData_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        mapImageData_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string map_image_data = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMapImageDataBytes() {
+      Object ref = mapImageData_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        mapImageData_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @Override
     public final boolean isInitialized() {
@@ -4538,6 +4726,9 @@ public final class SCMessageDiyWorldMap {
       if (!getMapInfoBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, mapInfo_);
       }
+      if (!getMapImageDataBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, mapImageData_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4555,6 +4746,9 @@ public final class SCMessageDiyWorldMap {
       }
       if (!getMapInfoBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, mapInfo_);
+      }
+      if (!getMapImageDataBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, mapImageData_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4577,6 +4771,8 @@ public final class SCMessageDiyWorldMap {
           .equals(other.getMapData())) return false;
       if (!getMapInfo()
           .equals(other.getMapInfo())) return false;
+      if (!getMapImageData()
+          .equals(other.getMapImageData())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4594,6 +4790,8 @@ public final class SCMessageDiyWorldMap {
       hash = (53 * hash) + getMapData().hashCode();
       hash = (37 * hash) + MAP_INFO_FIELD_NUMBER;
       hash = (53 * hash) + getMapInfo().hashCode();
+      hash = (37 * hash) + MAP_IMAGE_DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getMapImageData().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4733,6 +4931,8 @@ public final class SCMessageDiyWorldMap {
 
         mapInfo_ = "";
 
+        mapImageData_ = "";
+
         return this;
       }
 
@@ -4762,6 +4962,7 @@ public final class SCMessageDiyWorldMap {
         result.mapName_ = mapName_;
         result.mapData_ = mapData_;
         result.mapInfo_ = mapInfo_;
+        result.mapImageData_ = mapImageData_;
         onBuilt();
         return result;
       }
@@ -4820,6 +5021,10 @@ public final class SCMessageDiyWorldMap {
         }
         if (!other.getMapInfo().isEmpty()) {
           mapInfo_ = other.mapInfo_;
+          onChanged();
+        }
+        if (!other.getMapImageData().isEmpty()) {
+          mapImageData_ = other.mapImageData_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -5054,6 +5259,75 @@ public final class SCMessageDiyWorldMap {
   checkByteStringIsUtf8(value);
         
         mapInfo_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object mapImageData_ = "";
+      /**
+       * <code>string map_image_data = 4;</code>
+       */
+      public String getMapImageData() {
+        Object ref = mapImageData_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          mapImageData_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>string map_image_data = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMapImageDataBytes() {
+        Object ref = mapImageData_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          mapImageData_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string map_image_data = 4;</code>
+       */
+      public Builder setMapImageData(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        mapImageData_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string map_image_data = 4;</code>
+       */
+      public Builder clearMapImageData() {
+        
+        mapImageData_ = getDefaultInstance().getMapImageData();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string map_image_data = 4;</code>
+       */
+      public Builder setMapImageDataBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        mapImageData_ = value;
         onChanged();
         return this;
       }
@@ -11232,39 +11506,40 @@ public final class SCMessageDiyWorldMap {
       "\000\022/\n\021responseMapsCount\030\005 \001(\0132\022.ResponseM" +
       "apsCountH\000\";\n\014ResponseType\022\010\n\004SAVE\020\000\022\010\n\004" +
       "LOAD\020\001\022\007\n\003GET\020\002\022\016\n\nMAPS_COUNT\020\003B\013\n\tdata_" +
-      "body\"{\n\nMapContent\022\016\n\006map_id\030\001 \001(\005\022\020\n\010ma" +
-      "p_data\030\002 \001(\t\022\020\n\010map_name\030\003 \001(\t\022\023\n\013upload" +
-      "_time\030\004 \001(\t\022\022\n\nmap_author\030\005 \001(\t\022\020\n\010map_i" +
-      "nfo\030\006 \001(\t\"C\n\013RequestSave\022\020\n\010map_name\030\001 \001" +
-      "(\t\022\020\n\010map_data\030\002 \001(\t\022\020\n\010map_info\030\003 \001(\t\"O" +
-      "\n\014ResponseSave\022\016\n\006result\030\001 \001(\010\022 \n\013map_co" +
-      "ntent\030\002 \001(\0132\013.MapContent\022\r\n\005words\030\003 \001(\t\"" +
-      "\035\n\013RequestLoad\022\016\n\006map_id\030\001 \001(\005\"O\n\014Respon" +
-      "seLoad\022\016\n\006result\030\001 \001(\010\022 \n\013map_content\030\002 " +
-      "\001(\0132\013.MapContent\022\r\n\005words\030\003 \001(\t\"\363\002\n\nRequ" +
-      "estGet\022\020\n\010page_idx\030\001 \001(\005\022\021\n\tpage_size\030\002 " +
-      "\001(\005\022\021\n\tascending\030\003 \001(\010\022\'\n\tsort_type\030\004 \001(" +
-      "\0162\024.RequestGet.SortType\022+\n\013search_type\030\005" +
-      " \001(\0162\026.RequestGet.SearchType\022\024\n\014search_v" +
-      "alue\030\006 \001(\t\022\027\n\017only_maps_count\030\007 \001(\010\"N\n\010S" +
-      "ortType\022\013\n\007SORT_ID\020\000\022\r\n\tSORT_TIME\020\001\022\021\n\rS" +
-      "ORT_MAP_NAME\020\002\022\023\n\017SORT_MAP_AUTHOR\020\003\"X\n\nS" +
-      "earchType\022\017\n\013SEARCH_NULL\020\000\022\r\n\tSEARCH_ID\020" +
-      "\001\022\023\n\017SEARCH_MAP_NAME\020\002\022\025\n\021SEARCH_MAP_AUT" +
-      "HOR\020\003\"\314\003\n\013ResponseGet\022\016\n\006result\030\001 \001(\010\022(\n" +
-      "\tsort_type\030\002 \001(\0162\025.ResponseGet.SortType\022" +
-      "!\n\014map_contents\030\003 \003(\0132\013.MapContent\022\r\n\005wo" +
-      "rds\030\004 \001(\t\022,\n\013search_type\030\005 \001(\0162\027.Respons" +
-      "eGet.SearchType\022\024\n\014search_value\030\006 \001(\t\022\021\n" +
-      "\tascending\030\007 \001(\010\022\020\n\010page_idx\030\010 \001(\005\022\021\n\tpa" +
-      "ge_size\030\t \001(\005\022\022\n\nmaps_count\030\n \001(\005\022\027\n\017onl" +
-      "y_maps_count\030\013 \001(\010\"N\n\010SortType\022\013\n\007SORT_I" +
-      "D\020\000\022\r\n\tSORT_TIME\020\001\022\021\n\rSORT_MAP_NAME\020\002\022\023\n" +
-      "\017SORT_MAP_AUTHOR\020\003\"X\n\nSearchType\022\017\n\013SEAR" +
-      "CH_NULL\020\000\022\r\n\tSEARCH_ID\020\001\022\023\n\017SEARCH_MAP_N" +
-      "AME\020\002\022\025\n\021SEARCH_MAP_AUTHOR\020\003\"\022\n\020RequestM" +
-      "apsCount\"\"\n\021ResponseMapsCount\022\r\n\005count\030\001" +
-      " \001(\005b\006proto3"
+      "body\"\223\001\n\nMapContent\022\016\n\006map_id\030\001 \001(\005\022\020\n\010m" +
+      "ap_data\030\002 \001(\t\022\020\n\010map_name\030\003 \001(\t\022\023\n\013uploa" +
+      "d_time\030\004 \001(\t\022\022\n\nmap_author\030\005 \001(\t\022\020\n\010map_" +
+      "info\030\006 \001(\t\022\026\n\016map_image_data\030\007 \001(\t\"[\n\013Re" +
+      "questSave\022\020\n\010map_name\030\001 \001(\t\022\020\n\010map_data\030" +
+      "\002 \001(\t\022\020\n\010map_info\030\003 \001(\t\022\026\n\016map_image_dat" +
+      "a\030\004 \001(\t\"O\n\014ResponseSave\022\016\n\006result\030\001 \001(\010\022" +
+      " \n\013map_content\030\002 \001(\0132\013.MapContent\022\r\n\005wor" +
+      "ds\030\003 \001(\t\"\035\n\013RequestLoad\022\016\n\006map_id\030\001 \001(\005\"" +
+      "O\n\014ResponseLoad\022\016\n\006result\030\001 \001(\010\022 \n\013map_c" +
+      "ontent\030\002 \001(\0132\013.MapContent\022\r\n\005words\030\003 \001(\t" +
+      "\"\363\002\n\nRequestGet\022\020\n\010page_idx\030\001 \001(\005\022\021\n\tpag" +
+      "e_size\030\002 \001(\005\022\021\n\tascending\030\003 \001(\010\022\'\n\tsort_" +
+      "type\030\004 \001(\0162\024.RequestGet.SortType\022+\n\013sear" +
+      "ch_type\030\005 \001(\0162\026.RequestGet.SearchType\022\024\n" +
+      "\014search_value\030\006 \001(\t\022\027\n\017only_maps_count\030\007" +
+      " \001(\010\"N\n\010SortType\022\013\n\007SORT_ID\020\000\022\r\n\tSORT_TI" +
+      "ME\020\001\022\021\n\rSORT_MAP_NAME\020\002\022\023\n\017SORT_MAP_AUTH" +
+      "OR\020\003\"X\n\nSearchType\022\017\n\013SEARCH_NULL\020\000\022\r\n\tS" +
+      "EARCH_ID\020\001\022\023\n\017SEARCH_MAP_NAME\020\002\022\025\n\021SEARC" +
+      "H_MAP_AUTHOR\020\003\"\314\003\n\013ResponseGet\022\016\n\006result" +
+      "\030\001 \001(\010\022(\n\tsort_type\030\002 \001(\0162\025.ResponseGet." +
+      "SortType\022!\n\014map_contents\030\003 \003(\0132\013.MapCont" +
+      "ent\022\r\n\005words\030\004 \001(\t\022,\n\013search_type\030\005 \001(\0162" +
+      "\027.ResponseGet.SearchType\022\024\n\014search_value" +
+      "\030\006 \001(\t\022\021\n\tascending\030\007 \001(\010\022\020\n\010page_idx\030\010 " +
+      "\001(\005\022\021\n\tpage_size\030\t \001(\005\022\022\n\nmaps_count\030\n \001" +
+      "(\005\022\027\n\017only_maps_count\030\013 \001(\010\"N\n\010SortType\022" +
+      "\013\n\007SORT_ID\020\000\022\r\n\tSORT_TIME\020\001\022\021\n\rSORT_MAP_" +
+      "NAME\020\002\022\023\n\017SORT_MAP_AUTHOR\020\003\"X\n\nSearchTyp" +
+      "e\022\017\n\013SEARCH_NULL\020\000\022\r\n\tSEARCH_ID\020\001\022\023\n\017SEA" +
+      "RCH_MAP_NAME\020\002\022\025\n\021SEARCH_MAP_AUTHOR\020\003\"\022\n" +
+      "\020RequestMapsCount\"\"\n\021ResponseMapsCount\022\r" +
+      "\n\005count\030\001 \001(\005b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -11295,13 +11570,13 @@ public final class SCMessageDiyWorldMap {
     internal_static_MapContent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MapContent_descriptor,
-        new String[] { "MapId", "MapData", "MapName", "UploadTime", "MapAuthor", "MapInfo", });
+        new String[] { "MapId", "MapData", "MapName", "UploadTime", "MapAuthor", "MapInfo", "MapImageData", });
     internal_static_RequestSave_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_RequestSave_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RequestSave_descriptor,
-        new String[] { "MapName", "MapData", "MapInfo", });
+        new String[] { "MapName", "MapData", "MapInfo", "MapImageData", });
     internal_static_ResponseSave_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_ResponseSave_fieldAccessorTable = new

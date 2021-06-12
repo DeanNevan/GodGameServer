@@ -17,6 +17,7 @@ import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import protobuf.SSMessageClientStateClose;
+import redis.clients.jedis.Jedis;
 
 import javax.jms.JMSException;
 import java.io.IOException;
@@ -27,8 +28,6 @@ import java.util.Properties;
 import java.util.Vector;
 
 public class GateServer extends Server{
-    public Logger logger = LoggerFactory.getLogger(GateServer.class);
-
     private volatile static GateServer singleton;
 
     public static GateServer getSingleton() {
@@ -45,35 +44,23 @@ public class GateServer extends Server{
     public void startServer() {
         serverAgentType = ServerAgentType.GATE_SERVER;
         ip = "127.0.0.1";
-
-        RedisConnection.getSingleton().init(logger, "");
         boolean result = getSingleton().selectAvailablePort();
         if (!result){
             logger.debug(String.format("%s启动失败 服务器ID：%s addr:%s", serverName, getServerID(), getAddr()));
             closeServer();
             return;
         }
-        ServerAgentTool.updateServerAgentIDXWithRedis(RedisConnection.getSingleton().getJedis(), this);
-        ServerAgentTool.updateServerAgentToRedis(RedisConnection.getSingleton().getJedis(), this);
-        // 添加程序关闭监听线程
-        Runtime.getRuntime().addShutdownHook(this);
 
         MQSCMsgReqHeartBeatHandler.getSingleton().init(this);
         MQSCMsgResHandler.getSingleton().init(this);
-
         MQSCMsgReqHandler.getSingleton().init(this);
-
         MQSSMsgClientStateHandler.getSingleton().init(this);
-
-
         GateServerClientPool.getSingleton().init(this);
         GateServerClientHeartBeatManager.getSingleton().startMonitor();
 
+        super.startServer();
 
 
-        logger.debug(String.format("%s启动成功 服务器ID：%s addr:%s", serverName, getServerID(), getAddr()));
-        setServerState(SERVER_STATE.ACTIVE);
-        ServerAgentTool.updateServerAgentToRedis(RedisConnection.getSingleton().getJedis(), this);
     }
 
     public static void main(String[] args) throws Exception{
@@ -95,10 +82,16 @@ public class GateServer extends Server{
         }
     }
 
-    private void closeServer(){
+    public void run() {
+        closeServer();
+    }
+
+    public void closeServer(){
         setServerState(SERVER_STATE.STOPPING);
-        ServerAgentTool.updateServerAgentToRedis(RedisConnection.getSingleton().getJedis(), this);
-        ServerAgentTool.removeServerAgentToRedis(RedisConnection.getSingleton().getJedis(), this);
+        Jedis jedis = RedisConnection.getSingleton().getJedis();
+        ServerAgentTool.updateServerAgentToRedis(jedis, this);
+        ServerAgentTool.removeServerAgentToRedis(jedis, this);
+        RedisConnection.getSingleton().close(jedis);
         Iterator iter = GateServerClientPool.getSingleton().getClients().entrySet().iterator();
         while (iter.hasNext()) {
             Map.Entry entry = (Map.Entry) iter.next();
@@ -120,10 +113,6 @@ public class GateServer extends Server{
 
     private GateServer(){
         serverName = "网关服务器";
-    }
-
-    public void run() {
-        closeServer();
     }
 
     private Properties properties;

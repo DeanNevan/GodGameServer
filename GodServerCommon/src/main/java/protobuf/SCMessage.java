@@ -218,6 +218,11 @@ public final class SCMessage {
      * <code>int64 timestamp = 8;</code>
      */
     long getTimestamp();
+
+    /**
+     * <code>int32 request_id = 9;</code>
+     */
+    int getRequestId();
   }
   /**
    * Protobuf type {@code Request}
@@ -312,6 +317,11 @@ public final class SCMessage {
             case 64: {
 
               timestamp_ = input.readInt64();
+              break;
+            }
+            case 72: {
+
+              requestId_ = input.readInt32();
               break;
             }
             default: {
@@ -550,6 +560,15 @@ public final class SCMessage {
       return timestamp_;
     }
 
+    public static final int REQUEST_ID_FIELD_NUMBER = 9;
+    private int requestId_;
+    /**
+     * <code>int32 request_id = 9;</code>
+     */
+    public int getRequestId() {
+      return requestId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @Override
     public final boolean isInitialized() {
@@ -587,6 +606,9 @@ public final class SCMessage {
       }
       if (timestamp_ != 0L) {
         output.writeInt64(8, timestamp_);
+      }
+      if (requestId_ != 0) {
+        output.writeInt32(9, requestId_);
       }
       unknownFields.writeTo(output);
     }
@@ -629,6 +651,10 @@ public final class SCMessage {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(8, timestamp_);
       }
+      if (requestId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, requestId_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -659,6 +685,8 @@ public final class SCMessage {
           .equals(other.getPassedServersIdList())) return false;
       if (getTimestamp()
           != other.getTimestamp()) return false;
+      if (getRequestId()
+          != other.getRequestId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -689,6 +717,8 @@ public final class SCMessage {
       hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTimestamp());
+      hash = (37 * hash) + REQUEST_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getRequestId();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -838,6 +868,8 @@ public final class SCMessage {
         bitField0_ = (bitField0_ & ~0x00000040);
         timestamp_ = 0L;
 
+        requestId_ = 0;
+
         return this;
       }
 
@@ -878,6 +910,7 @@ public final class SCMessage {
         }
         result.passedServersId_ = passedServersId_;
         result.timestamp_ = timestamp_;
+        result.requestId_ = requestId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -961,6 +994,9 @@ public final class SCMessage {
         }
         if (other.getTimestamp() != 0L) {
           setTimestamp(other.getTimestamp());
+        }
+        if (other.getRequestId() != 0) {
+          setRequestId(other.getRequestId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1461,6 +1497,32 @@ public final class SCMessage {
         onChanged();
         return this;
       }
+
+      private int requestId_ ;
+      /**
+       * <code>int32 request_id = 9;</code>
+       */
+      public int getRequestId() {
+        return requestId_;
+      }
+      /**
+       * <code>int32 request_id = 9;</code>
+       */
+      public Builder setRequestId(int value) {
+        
+        requestId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 request_id = 9;</code>
+       */
+      public Builder clearRequestId() {
+        
+        requestId_ = 0;
+        onChanged();
+        return this;
+      }
       @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1595,6 +1657,11 @@ public final class SCMessage {
      * <code>int64 timestamp = 8;</code>
      */
     long getTimestamp();
+
+    /**
+     * <code>int32 request_id = 9;</code>
+     */
+    int getRequestId();
   }
   /**
    * Protobuf type {@code Response}
@@ -1689,6 +1756,11 @@ public final class SCMessage {
             case 64: {
 
               timestamp_ = input.readInt64();
+              break;
+            }
+            case 72: {
+
+              requestId_ = input.readInt32();
               break;
             }
             default: {
@@ -1927,6 +1999,15 @@ public final class SCMessage {
       return timestamp_;
     }
 
+    public static final int REQUEST_ID_FIELD_NUMBER = 9;
+    private int requestId_;
+    /**
+     * <code>int32 request_id = 9;</code>
+     */
+    public int getRequestId() {
+      return requestId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @Override
     public final boolean isInitialized() {
@@ -1964,6 +2045,9 @@ public final class SCMessage {
       }
       if (timestamp_ != 0L) {
         output.writeInt64(8, timestamp_);
+      }
+      if (requestId_ != 0) {
+        output.writeInt32(9, requestId_);
       }
       unknownFields.writeTo(output);
     }
@@ -2006,6 +2090,10 @@ public final class SCMessage {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(8, timestamp_);
       }
+      if (requestId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, requestId_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -2036,6 +2124,8 @@ public final class SCMessage {
           .equals(other.getPassedServersIdList())) return false;
       if (getTimestamp()
           != other.getTimestamp()) return false;
+      if (getRequestId()
+          != other.getRequestId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -2066,6 +2156,8 @@ public final class SCMessage {
       hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTimestamp());
+      hash = (37 * hash) + REQUEST_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getRequestId();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2215,6 +2307,8 @@ public final class SCMessage {
         bitField0_ = (bitField0_ & ~0x00000040);
         timestamp_ = 0L;
 
+        requestId_ = 0;
+
         return this;
       }
 
@@ -2255,6 +2349,7 @@ public final class SCMessage {
         }
         result.passedServersId_ = passedServersId_;
         result.timestamp_ = timestamp_;
+        result.requestId_ = requestId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2338,6 +2433,9 @@ public final class SCMessage {
         }
         if (other.getTimestamp() != 0L) {
           setTimestamp(other.getTimestamp());
+        }
+        if (other.getRequestId() != 0) {
+          setRequestId(other.getRequestId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2838,6 +2936,32 @@ public final class SCMessage {
         onChanged();
         return this;
       }
+
+      private int requestId_ ;
+      /**
+       * <code>int32 request_id = 9;</code>
+       */
+      public int getRequestId() {
+        return requestId_;
+      }
+      /**
+       * <code>int32 request_id = 9;</code>
+       */
+      public Builder setRequestId(int value) {
+        
+        requestId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 request_id = 9;</code>
+       */
+      public Builder clearRequestId() {
+        
+        requestId_ = 0;
+        onChanged();
+        return this;
+      }
       @Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2910,15 +3034,16 @@ public final class SCMessage {
       descriptor;
   static {
     String[] descriptorData = {
-      "\n\017SCMessage.proto\"\247\001\n\007Request\022\023\n\004type\030\001 " +
+      "\n\017SCMessage.proto\"\273\001\n\007Request\022\023\n\004type\030\001 " +
       "\001(\0162\005.Type\022\017\n\007content\030\002 \001(\014\022\020\n\010content2\030" +
       "\003 \001(\t\022\026\n\016gate_server_id\030\004 \001(\t\022\021\n\tclient_" +
       "id\030\005 \001(\t\022\013\n\003tip\030\006 \001(\t\022\031\n\021passed_servers_" +
-      "id\030\007 \003(\t\022\021\n\ttimestamp\030\010 \001(\003\"\250\001\n\010Response" +
-      "\022\023\n\004type\030\001 \001(\0162\005.Type\022\017\n\007content\030\002 \001(\014\022\020" +
-      "\n\010content2\030\003 \001(\t\022\026\n\016gate_server_id\030\004 \001(\t" +
-      "\022\021\n\tclient_id\030\005 \001(\t\022\013\n\003tip\030\006 \001(\t\022\031\n\021pass" +
-      "ed_servers_id\030\007 \003(\t\022\021\n\ttimestamp\030\010 \001(\003*D" +
+      "id\030\007 \003(\t\022\021\n\ttimestamp\030\010 \001(\003\022\022\n\nrequest_i" +
+      "d\030\t \001(\005\"\274\001\n\010Response\022\023\n\004type\030\001 \001(\0162\005.Typ" +
+      "e\022\017\n\007content\030\002 \001(\014\022\020\n\010content2\030\003 \001(\t\022\026\n\016" +
+      "gate_server_id\030\004 \001(\t\022\021\n\tclient_id\030\005 \001(\t\022" +
+      "\013\n\003tip\030\006 \001(\t\022\031\n\021passed_servers_id\030\007 \003(\t\022" +
+      "\021\n\ttimestamp\030\010 \001(\003\022\022\n\nrequest_id\030\t \001(\005*D" +
       "\n\004Type\022\013\n\007UNKNOWN\020\000\022\013\n\007CONNECT\020\001\022\016\n\nHEAR" +
       "T_BEAT\020\002\022\t\n\005LOGIN\020\003\022\007\n\003DIY\020\004b\006proto3"
     };
@@ -2939,13 +3064,13 @@ public final class SCMessage {
     internal_static_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Request_descriptor,
-        new String[] { "Type", "Content", "Content2", "GateServerId", "ClientId", "Tip", "PassedServersId", "Timestamp", });
+        new String[] { "Type", "Content", "Content2", "GateServerId", "ClientId", "Tip", "PassedServersId", "Timestamp", "RequestId", });
     internal_static_Response_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Response_descriptor,
-        new String[] { "Type", "Content", "Content2", "GateServerId", "ClientId", "Tip", "PassedServersId", "Timestamp", });
+        new String[] { "Type", "Content", "Content2", "GateServerId", "ClientId", "Tip", "PassedServersId", "Timestamp", "RequestId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

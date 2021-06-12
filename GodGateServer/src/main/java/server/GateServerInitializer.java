@@ -22,7 +22,7 @@ public class GateServerInitializer extends ChannelInitializer<SocketChannel>{
         ChannelPipeline pipeline = ch.pipeline();
 
         ByteBuf delimiter = Unpooled.copiedBuffer("$_$".getBytes());
-        pipeline.addLast(new DelimiterBasedFrameDecoder(4096, delimiter));
+        pipeline.addLast(new DelimiterBasedFrameDecoder(262144, delimiter));
 //        //解码器，通过Google Protocol Buffers序列化框架动态的切割接收到的ByteBuf
         //pipeline.addLast(new ProtobufVarint32FrameDecoder());
         //服务器端接收的是客户端RequestUser对象，所以这边将接收对象进行解码生产实列

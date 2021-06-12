@@ -91,7 +91,10 @@ public class MQSCMsgDiyHandler extends MsgHandler {
 
             SCMessage.Request request = (SCMessage.Request) MQMessageParser.parseMessageToProtobuf(bytesMsg, SCMessage.Request.parser());
             assert request != null;
-            server.logger.debug(String.format("服务器ID:%s %s 处理消息：%s", server.getServerID(), msgHandlerName, request.toString()));
+            if (request.toByteString().size() < 500){
+                server.logger.debug(String.format("服务器ID:%s %s 处理消息：%s", server.getServerID(), msgHandlerName, request.toString()));
+            }
+            server.logger.debug(String.format("服务器ID:%s %s 处理消息长度：%d", server.getServerID(), msgHandlerName, request.toByteString().size()));
             SCMessageDiy.Request requestDiy = null;
             try {
                 requestDiy = SCMessageDiy.Request.parseFrom(request.getContent());
@@ -131,7 +134,8 @@ public class MQSCMsgDiyHandler extends MsgHandler {
                                     userName,
                                     requestSave.getMapName(),
                                     requestSave.getMapData(),
-                                    requestSave.getMapInfo()
+                                    requestSave.getMapInfo(),
+                                    requestSave.getMapImageData()
                                     );
                             if (saveResult <= 0){
                                 server.logger.debug(String.format("保存地图错误，错误代码：%s", saveResult));
@@ -292,6 +296,7 @@ public class MQSCMsgDiyHandler extends MsgHandler {
             responseBuilder1.setGateServerId(request.getGateServerId());
             responseBuilder1.addAllPassedServersId(request.getPassedServersIdList());
             responseBuilder1.addPassedServersId(server.getServerID());
+            responseBuilder1.setRequestId(request.getRequestId());
 
             try {
                 MQProducerTool.getInstance().sendBuilder("SCMessageResponse", responseBuilder1, "target_server_id", request.getGateServerId());

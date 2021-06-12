@@ -33,12 +33,16 @@ public class RedisGateClientsWorker {
         while (iter.hasNext()) {
             intList.add((String) iter.next());
         }
+
+        RedisConnection.getSingleton().close(jedis);
+
         return intList;
     }
 
     public boolean isActiveClientIDExists(String id){
         Jedis jedis = RedisConnection.getSingleton().getJedis();
         boolean result = jedis.hexists("client:clients", id);
+        RedisConnection.getSingleton().close(jedis);
         return result;
     }
 
@@ -48,6 +52,7 @@ public class RedisGateClientsWorker {
         if (jsonString == null) return null;
         GateServerClient gateServerClient = new GateServerClient("", "");
         gateServerClient.parseFromJSONString(jsonString);
+        RedisConnection.getSingleton().close(jedis);
         return gateServerClient;
     }
 
@@ -59,6 +64,7 @@ public class RedisGateClientsWorker {
         gateServerClient.parseToJSONObject(object);
         String string = object.toJSONString();
         jedis.hset("client:abandoned_clients", gateServerClient.getId(), string);
+        RedisConnection.getSingleton().close(jedis);
     }
 
     public void updateClient(GateServerClient gateServerClient){
@@ -69,10 +75,12 @@ public class RedisGateClientsWorker {
         gateServerClient.parseToJSONObject(object);
         String string = object.toJSONString();
         jedis.hset("client:clients", gateServerClient.getId(), string);
+        RedisConnection.getSingleton().close(jedis);
     }
 
     public void removeClient(GateServerClient gateServerClient){
         Jedis jedis = RedisConnection.getSingleton().getJedis();
         jedis.hdel("client:clients", String.valueOf(gateServerClient.getId()));
+        RedisConnection.getSingleton().close(jedis);
     }
 }

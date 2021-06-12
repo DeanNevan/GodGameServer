@@ -12,7 +12,11 @@ public class GateServerHandler extends SimpleChannelInboundHandler<SCMessage.Req
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, SCMessage.Request msg) throws Exception {
-        GateServer.getSingleton().logger.debug(String.format("服务器ID:%s 通道id:%s 收到信息 msg:%s", GateServer.getSingleton().getServerID(), ctx.channel().id(), msg.toString()));
+        if (msg.toByteString().size() < 500){
+            GateServer.getSingleton().logger.debug(String.format("服务器ID:%s 通道id:%s 收到信息 msg:%s", GateServer.getSingleton().getServerID(), ctx.channel().id(), msg.toString()));
+        }
+        GateServer.getSingleton().logger.debug(String.format("服务器ID:%s 通道id:%s 收到信息 msg 长度:%d", GateServer.getSingleton().getServerID(), ctx.channel().id(), msg.toByteString().size()));
+
 
         if (msg.getType().equals(SCMessage.Type.CONNECT)){
             GateServerClient gateServerClient = GateServerClientHeartBeatManager.getSingleton().clientHeartBeat(ClientTool.parseIDXtoClientID(GateServer.getSingleton(), 0));
@@ -28,14 +32,21 @@ public class GateServerHandler extends SimpleChannelInboundHandler<SCMessage.Req
             responseBuilder.setType(SCMessage.Type.CONNECT);
             responseBuilder.setGateServerId(GateServer.getSingleton().getServerID());
             responseBuilder.addPassedServersId(GateServer.getSingleton().getServerID());
+            responseBuilder.setRequestId(msg.getRequestId());
 
             ////
-            //responseBuilder.setTip("123456789009876543211234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM");
+
+//            for (int i = 0; i < 65536; i++){
+//                responseBuilder.setTip(responseBuilder.getTip() + "111");
+//            }
+
             //responseBuilder.setTip("xkcjocpn10-928234125124123312");
             ////
 
             SCMessage.Response response = responseBuilder.build();
             int temp = response.toByteString().size();
+
+            System.out.println(temp);
 
             ResponseWriter.writeResponse(gateServerClient.getCtx(), response);
 

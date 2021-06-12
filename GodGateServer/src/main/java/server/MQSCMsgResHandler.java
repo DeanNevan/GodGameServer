@@ -56,14 +56,19 @@ public class MQSCMsgResHandler extends MsgHandler{
 
             SCMessage.Response response = (SCMessage.Response) MQMessageParser.parseMessageToProtobuf(bytesMsg, SCMessage.Response.parser());
             assert response != null;
-            server.logger.debug(String.format("服务器ID:%s %s 处理消息：%s", server.getServerID(), msgHandlerName, response.toString()));
-            server.logger.debug(String.format("服务器ID:%s %s 处理消息长度：%d", server.getServerID(), msgHandlerName, response.toByteArray().length));
+
             String clientId = response.getClientId();
             response.toBuilder().addPassedServersId(server.getServerID()).build();
             GateServerClient gateServerClient = GateServerClientPool.getSingleton().getClientViaID(clientId);
             if (gateServerClient != null){
                 response = response.toBuilder().addPassedServersId(server.getServerID()).build();
                 ResponseWriter.writeResponse(gateServerClient.getCtx(), response);
+
+                if (response.toByteArray().length < 500){
+                    server.logger.debug(String.format("服务器ID:%s %s 回复消息：%s", server.getServerID(), msgHandlerName, response.toString()));
+                }
+                    server.logger.debug(String.format("服务器ID:%s %s 回复消息长度：%d", server.getServerID(), msgHandlerName, response.toByteArray().length));
+
             }
         }
     }
