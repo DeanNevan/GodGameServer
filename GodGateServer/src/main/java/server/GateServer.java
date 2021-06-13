@@ -131,7 +131,7 @@ public class GateServer extends Server{
             Iterator iter = vector.iterator();
             while (iter.hasNext()) {
                 ServerAgent serverAgent = (ServerAgent) iter.next();
-                vectorUsedPorts.add(serverAgent.port);
+                if (serverAgent.ip.equals(getSingleton().ip)) vectorUsedPorts.add(serverAgent.port);
             }
 
             for (String scanningPort : ports){

@@ -13,6 +13,8 @@
         <module>GodGateServer</module>
         <module>GodDiyServer</module>
         <module>GodServerCommon</module>
+        <module>GodMatchGateServer</module>
+        <module>GodMatchManagerServer</module>
     </modules>
 
     <properties>

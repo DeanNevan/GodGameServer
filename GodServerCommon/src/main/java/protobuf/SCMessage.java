@@ -37,6 +37,22 @@ public final class SCMessage {
      * <code>DIY = 4;</code>
      */
     DIY(4),
+    /**
+     * <code>MATCH_HOST = 5;</code>
+     */
+    MATCH_HOST(5),
+    /**
+     * <code>MATCH_GET = 6;</code>
+     */
+    MATCH_GET(6),
+    /**
+     * <code>MATCH_JOIN = 7;</code>
+     */
+    MATCH_JOIN(7),
+    /**
+     * <code>MATCH_PARING_UPDATE = 8;</code>
+     */
+    MATCH_PARING_UPDATE(8),
     UNRECOGNIZED(-1),
     ;
 
@@ -60,6 +76,22 @@ public final class SCMessage {
      * <code>DIY = 4;</code>
      */
     public static final int DIY_VALUE = 4;
+    /**
+     * <code>MATCH_HOST = 5;</code>
+     */
+    public static final int MATCH_HOST_VALUE = 5;
+    /**
+     * <code>MATCH_GET = 6;</code>
+     */
+    public static final int MATCH_GET_VALUE = 6;
+    /**
+     * <code>MATCH_JOIN = 7;</code>
+     */
+    public static final int MATCH_JOIN_VALUE = 7;
+    /**
+     * <code>MATCH_PARING_UPDATE = 8;</code>
+     */
+    public static final int MATCH_PARING_UPDATE_VALUE = 8;
 
 
     public final int getNumber() {
@@ -85,6 +117,10 @@ public final class SCMessage {
         case 2: return HEART_BEAT;
         case 3: return LOGIN;
         case 4: return DIY;
+        case 5: return MATCH_HOST;
+        case 6: return MATCH_GET;
+        case 7: return MATCH_JOIN;
+        case 8: return MATCH_PARING_UPDATE;
         default: return null;
       }
     }
@@ -3043,9 +3079,11 @@ public final class SCMessage {
       "e\022\017\n\007content\030\002 \001(\014\022\020\n\010content2\030\003 \001(\t\022\026\n\016" +
       "gate_server_id\030\004 \001(\t\022\021\n\tclient_id\030\005 \001(\t\022" +
       "\013\n\003tip\030\006 \001(\t\022\031\n\021passed_servers_id\030\007 \003(\t\022" +
-      "\021\n\ttimestamp\030\010 \001(\003\022\022\n\nrequest_id\030\t \001(\005*D" +
-      "\n\004Type\022\013\n\007UNKNOWN\020\000\022\013\n\007CONNECT\020\001\022\016\n\nHEAR" +
-      "T_BEAT\020\002\022\t\n\005LOGIN\020\003\022\007\n\003DIY\020\004b\006proto3"
+      "\021\n\ttimestamp\030\010 \001(\003\022\022\n\nrequest_id\030\t \001(\005*\214" +
+      "\001\n\004Type\022\013\n\007UNKNOWN\020\000\022\013\n\007CONNECT\020\001\022\016\n\nHEA" +
+      "RT_BEAT\020\002\022\t\n\005LOGIN\020\003\022\007\n\003DIY\020\004\022\016\n\nMATCH_H" +
+      "OST\020\005\022\r\n\tMATCH_GET\020\006\022\016\n\nMATCH_JOIN\020\007\022\027\n\023" +
+      "MATCH_PARING_UPDATE\020\010b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
